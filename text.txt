@@ -1,0 +1,1 @@
+this is a job app, that includes how the API  will be consumed in a real application
