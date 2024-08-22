@@ -42,18 +42,18 @@ Email Validation Regex
 - If correct, generate Token
 - Send Response with Token
 
-#### Mongoose Errors
+#### Mongoose Errors (user friendly error handler)
 
-- Validation Errors
-- Duplicate (Email)
-- Cast Error
+- Validation Errors - validates if the password  or email is correct.
+- Duplicate (Email) - responds to duplicated email properly.
+- Cast Error - checks when the ID syntax doesn't match what the mongoose is looking for.
 
 #### Security
-
-- helmet
-- cors
-- xss-clean
-- express-rate-limit
+-npm packages below  are used to protect our api added as middleware in our apps.
+- helmet -most popular security package that sets various http headers to prevent numorous possible attacks.
+- cors -ensures the api is accessible from different domains.
+- xss-clean - sentizes the users input in req.body, req.params and query and protects from cross-site scripting attacks, where the attackers tries to inject some malicious codes.
+- express-rate-limit - helps limits the number of request a user can make.
 
 Swagger UI
 

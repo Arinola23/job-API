@@ -38,7 +38,7 @@ userSchema.pre('save', async function () {
 //instance methods mongoose middleware
 userSchema.methods.createJWT = function () {
     // return jwt.sign({userId:this._id, name: this.name}, 'jwtsecret', {expiresIn: '30d'} ) the hard coded way
-    return jwt.sign({userId:this._id, name: this.name}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_LIFETIME} )
+    return jwt.sign({userId:this._id, name: this.name}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_LIFETIME})
 
 }
 

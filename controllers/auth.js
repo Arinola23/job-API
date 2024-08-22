@@ -16,19 +16,17 @@ const token = user.createJWT()
 // the token has being moved to the model for a cleaner code using mongoose middleware 'methods'
 //  const token = jwt.sign({userId: user._id, name: user.name}, 'jwtSecret', {expiresIn: '30d'})
 //res.status(StatusCodes.CREATED).json({user: {name: user.getName()}, token })
-res.status(StatusCodes.CREATED).json({user: {name: user.name}, token})
+res.status(StatusCodes.CREATED).json({user: {userId:user._id, name: user.name}, token})
 }
 
 const logIn = async (req, res) => {
 const {email, password} = req.body
-
-// if(!email) {
-//     throw new BadRequestError('email incorrect')
-// }
-// if(!password) {
-//     throw new BadRequestError('password incorrect')
-// }
-
+    if(!email) {
+        throw new BadRequestError('email incorrect')
+    }
+    if(!password) {
+        throw new BadRequestError('password incorrect')
+    }
 const user = await User.findOne({email})
 if(!user){
     throw new unAuthenticatedError('Invalid credential "email" ')
@@ -38,8 +36,7 @@ const isPasswordCorrect = await user.comparePassword(password)
 if(!isPasswordCorrect){
     throw new unAuthenticatedError('invalid credentials "password" ')
 }
-
-const token= user.createJWT()
+const token = user.createJWT()
 res.status(StatusCodes.OK).json({user:{name: user.name}, token})
 }
 
