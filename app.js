@@ -9,6 +9,11 @@ const cors = require('cors')
 const xss = require('xss-clean')
 const rateLimiter = require('express-rate-limit') 
 
+//swagger
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load("./sawgger.yaml")
+
 //cconnetDB
 const connectDB =require("./db/connect")
 connectDB()
@@ -37,8 +42,9 @@ app.use(xss())
 
 app.get("/", (req, res) => {
     res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>')
+   // res.send('<h1>Jobs API</h1> ')
 })
-
+app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 //routes
 app.use('/api/v1/auth', authRouters)
 app.use('/api/v1/jobs', AuthenticateUser, jobsRouters)
